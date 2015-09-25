@@ -20,6 +20,16 @@ return [
         ],
     ],
     'components' => [
+        // 主题设置
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@backend/views' => '@backend/themes/adminlte'
+                ],
+                'baseUrl' => '@web/themes/adminlte',
+
+            ],
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -46,6 +56,7 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+
     ],
     'params' => $params,
 ];
