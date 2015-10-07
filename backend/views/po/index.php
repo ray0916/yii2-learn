@@ -31,19 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($model, $key, $index, $column) {
                     return GridView::ROW_COLLAPSED;
                 },
-                'detail' => function ($model, $key, $index, $column) {
-                    //return Yii::$app->controller->renderPartial('_poItem');
-
-                    $searchModel = new \backend\models\PoItemSearch();
-                    $searchModel->po_id = $model->id;
-                    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-                    return Yii::$app->controller->renderPartial('_poItem',[
-                        'searchModel' => $searchModel,
-                        'dataProvider' => $dataProvider,
-                    ]);
-
-                }
+                /*'detail' => function($model){
+                    return Yii::$app->controller->renderPartial('_poItem', ['model'=>$model]);
+                }*/
+                'detailurl' => \yii\helpers\Url::to(['/po/po-item'])
             ],
 
             'po_no',

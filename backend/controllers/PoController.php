@@ -75,13 +75,13 @@ class PoController extends Controller
             Model::loadMultiple($modelsPoItem, Yii::$app->request->post());
 
             // ajax validation
-            if (Yii::$app->request->isAjax) {
+            /*if (Yii::$app->request->isAjax) {
                 Yii::$app->response->format = Response::FORMAT_JSON;
                 return ArrayHelper::merge(
                     ActiveForm::validateMultiple($modelsPoItem),
                     ActiveForm::validate($model)
                 );
-            }
+            }*/
 
             // validate all models
             $valid = $model->validate();
@@ -93,7 +93,7 @@ class PoController extends Controller
                     if ($flag = $model->save(false)) {
                         foreach ($modelsPoItem as $modelPoItem) {
                             $modelPoItem->po_id = $model->id;
-                            if (! ($flag = $modelPoItem->save(false))) {
+                            if (!($flag = $modelPoItem->save(false))) {
                                 $transaction->rollBack();
                                 break;
                             }
@@ -146,6 +146,21 @@ class PoController extends Controller
 
         return $this->redirect(['index']);
     }
+
+    /*public function actionPoItem(){
+        if (isset($_POST['expandRowKey'])) {
+            $searchModel = new \backend\models\PoItemSearch();
+            $searchModel->po_id = $_POST['expandRowKey'];
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            return $this->redirect('_poItem',[
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            return '<div class="alert alert-danger">No data found</div>';
+        }
+    }*/
 
     /**
      * Finds the Po model based on its primary key value.
