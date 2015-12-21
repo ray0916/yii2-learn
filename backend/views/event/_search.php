@@ -4,25 +4,24 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\CompaniesSearch */
+/* @var $model backend\models\EventSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="companies-search">
+<div class="event-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'globalSearch') ?>
+    <?= $form->field($model, 'id') ?>
 
+    <?= $form->field($model, 'title') ?>
 
-    <?php // echo $form->field($model, 'company_start_date') ?>
+    <?= $form->field($model, 'description') ?>
 
-    <?php // echo $form->field($model, 'company_created_date') ?>
-
-    <?php // echo $form->field($model, 'company_status') ?>
+    <?= $form->field($model, 'created_date') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

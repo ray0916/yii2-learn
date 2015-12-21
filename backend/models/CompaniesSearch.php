@@ -15,11 +15,13 @@ class CompaniesSearch extends Companies
     /**
      * @inheritdoc
      */
+    public $globalSearch;
+
     public function rules()
     {
         return [
             [['company_id'], 'integer'],
-            [['company_name', 'company_email', 'company_address', 'logo', 'company_start_date', 'company_created_date', 'company_status'], 'safe'],
+            [['company_name', 'globalSearch' , 'company_email', 'company_address', 'logo', 'company_start_date', 'company_created_date', 'company_status'], 'safe'],
         ];
     }
 
@@ -55,7 +57,7 @@ class CompaniesSearch extends Companies
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
+        /*$query->andFilterWhere([
             'company_id' => $this->company_id,
             'company_start_date' => $this->company_start_date,
             'company_created_date' => $this->company_created_date,
@@ -65,7 +67,12 @@ class CompaniesSearch extends Companies
             ->andFilterWhere(['like', 'company_email', $this->company_email])
             ->andFilterWhere(['like', 'company_address', $this->company_address])
             ->andFilterWhere(['like', 'logo', $this->logo])
-            ->andFilterWhere(['like', 'company_status', $this->company_status]);
+            ->andFilterWhere(['like', 'company_status', $this->company_status]);*/
+
+        $query->orFilterWhere(['like', 'company_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'company_email', $this->globalSearch])
+            ->orFilterWhere(['like', 'company_address', $this->globalSearch])
+            ->orFilterWhere(['like', 'company_status', $this->globalSearch]);
 
         return $dataProvider;
     }
